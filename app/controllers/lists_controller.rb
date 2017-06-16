@@ -29,6 +29,11 @@
     head :ok
   end
 
+  def manage
+    @lists = List.all
+    render 'lists/manage.json.jbuilder'
+  end
+
   private 
   def list_params
     params.permit(:title, :user_id)

@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(email: "test1@test.com", password: 'thuan274', password_confirmation: 'thuan274')
+admin = User.create!(email: "admin@admin.com", password: "admin123",
+                     password_confirmation: "admin123")
+user = User.create!(email: "thuan274@gmail.com", password: 'thuan274', password_confirmation: 'thuan274')
 5.times do |n|
   title = Faker::Date.between(6.days.ago, Date.today)
   list = List.create!(

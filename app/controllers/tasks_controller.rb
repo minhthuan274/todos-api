@@ -5,6 +5,7 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.build(title: params[:title], complete: false)
     if @task.save 
+      @list.add_todo
       render json: @task, status: :created, location: @task
     else
       render json: @task.errors
@@ -21,11 +22,13 @@ class TasksController < ApplicationController
   end
 
   def update
+    @list = List.find_by_id(@task.list_id).add_done
     @task.set_done
     head :ok
   end
 
   def destroy 
+    @list = List.find_by_id(@task.list_id).remove_done
     @task.destroy 
     head :ok
   end

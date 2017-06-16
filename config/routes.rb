@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :searchs,   only: [:index]
 
   post '/mark_all_done', to: 'tasks#mark_all_done'
-
+  get  '/list_management', to: 'lists#manage'
 end
