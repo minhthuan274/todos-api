@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615133843) do
+ActiveRecord::Schema.define(version: 20170618045950) do
 
   create_table "lists", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20170615133843) do
     t.integer "todo_count", default: 0
     t.integer "done_count", default: 0
     t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_shares_on_list_id"
+    t.index ["user_id", "list_id"], name: "index_shares_on_user_id_and_list_id", unique: true
+    t.index ["user_id"], name: "index_shares_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|

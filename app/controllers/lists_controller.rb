@@ -4,6 +4,7 @@
   def index
     @user = User.find(params[:user_id])
     @lists = @user.lists
+    @shares = Share.where(user_id: @user.id)
   end
 
   def create
@@ -16,6 +17,7 @@
   end
 
   def show
+    @user_id = @list.user_id
     @tasks = @list.tasks
   end
 

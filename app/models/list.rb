@@ -1,6 +1,7 @@
 class List < ApplicationRecord
   belongs_to :user
   has_many :tasks, dependent: :destroy 
+  has_many :shares, dependent: :destroy
   validates :title, presence: true 
 
   def add_todo
@@ -14,5 +15,9 @@ class List < ApplicationRecord
 
   def remove_done
     self.decrement!(:done_count)
+  end
+
+  def name_with_shared_user
+    "#{self.title} (shared by #{User.find_by_id(self.user_id).email})"
   end
 end
