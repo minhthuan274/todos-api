@@ -9,7 +9,7 @@ class SearchsController < ApplicationController
         end
       }
       @tasks = Task.all.where(["title LIKE ?", "%#{params[:query]}%"]).to_a
-      @tasks.select do |task|
+      @tasks.select! do |task|
          tasks_id.include?(task.id) 
       end
     end

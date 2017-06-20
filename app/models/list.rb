@@ -1,6 +1,6 @@
 class List < ApplicationRecord
   belongs_to :user
-  has_many :tasks, dependent: :destroy 
+  has_many :tasks,  dependent: :destroy 
   has_many :shares, dependent: :destroy
   validates :title, presence: true 
 
@@ -19,5 +19,10 @@ class List < ApplicationRecord
 
   def name_with_shared_user
     "#{self.title} (shared by #{User.find_by_id(self.user_id).email})"
+  end
+
+  def shares_label
+    shares = Share.where(list_id: self.id).length
+    "#{shares} people"
   end
 end
